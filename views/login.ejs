@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partial/head.ejs') %>
+<body>
+
+    <%- include('./partial/nav.ejs') %>
+      <div class="create-blog content">
+        <% if(typeof data != 'undefined') {%>
+               <%  data.map((item)=>{   %>
+    <p style="text-align: center; display: flex; justify-content: center; align-items: center;"><%= item.msg %></p>
+
+           <%    })  %>
+
+            <% } %>
+     
+        <form action="/login"  method="POST">
+          <label for="body">Email:</label>
+          <input type="text" id="email" name="email" >
+          <label for="body">password:</label>
+          <input type="text" id="password" name="password" >
+          <button>Submit</button>
+        </form>
+      </div>
+      <%- include('./partial/footer.ejs') %>
+</body>
+</html>

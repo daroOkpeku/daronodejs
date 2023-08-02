@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+ <%- include('./partial/head.ejs') %>
+<body>
+    <%- include('./partial/nav.ejs') %>
+
+    <div class="details content">
+     <h2><%= data.title %></h2>
+     <div class="content">
+     <p><%= data.body %></p>
+     </div>
+      <a class="delete" data-doc="<%= data.id %>">
+        delete
+    </a>
+    </div>
+   
+    <%- include('./partial/footer.ejs') %>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="/java.js" ></script>
+</html>
