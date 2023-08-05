@@ -1,5 +1,6 @@
 const Blog = require('../model/blog')
 const User = require('../model/user')
+const {sendmail} = require('../Mail/welcome_email');
 const bcrypt = require('bcrypt')
 const {  validationResult} = require('express-validator');
 const { findone } = require('./viewController');
@@ -27,6 +28,7 @@ function delone(request, response){
 
 async function userRegister(request, response, next){
     //console.log(request.body)
+  
     const error = validationResult(request);
     console.log(error.array())
     if(!error.isEmpty()){
@@ -45,6 +47,7 @@ async function userRegister(request, response, next){
                             email:request.body.email,
                             password:bcryptpass,
                         })
+                       await sendmail(request.body.email, 'welcome to ZenStream', 'Welcome to ZenStream you inspire entertain and educate you', request.body.firstname);
                         user.save().then(result=>{
                             console.log(result)
                         }).catch(error=>{
@@ -69,14 +72,24 @@ async function login (request, response, next){
 
     user = await User.findOne({'email':request.body.email})
     comparepass = await bcrypt.compare(request.body.password, user.password)
-    if(user && comparepass){
-       request.session.loggedin  = true;
-       request.session.username = user.firstname+" "+user.lastname
-       console.log('we are logged in')
-        response.redirect('checklog');
-    }else{
-        console.log('please insert your detail correctly')
+    if( request.session.authenticated ){
+        response.json(request.session)
+    }else{ 
+        if(user && comparepass){
+
+            request.session.authenticated  = true;
+            request.session.userid = user.id;
+            request.session.username = user.firname;
+            request.session.save();
+
+            console.log(request.session)
+            console.log('we are logged in')
+            /// response.redirect('checklog');
+         }else{
+             console.log('please insert your detail correctly')
+         }
     }
+  
 
 }
 

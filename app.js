@@ -137,6 +137,7 @@ Blog.find().then((result)=>response.send(result))
 
  app.get('/blogs/create', (request,  response)=>{
     // response.send('<p>404</p>');
+   
     response.render('create', {title:'create'})
  })
 
