@@ -11,7 +11,7 @@ const store = session.MemoryStore();
 const Mongostore = require("connect-mongo")
 try {
     //connecting to Database 
- const DBURL =  "mongodb+srv://stephendaro:jason007@cluster0.zxje8qe.mongodb.net/nodejs?retryWrites=true&w=majority";
+ const DBURL =  "mongodb+srv://username:password@cluster0.zxje8qe.mongodb.net/nodejs?retryWrites=true&w=majority";
  mongoose.connect(DBURL,{ useNewUrlParser: true, useUnifiedTopology:true  })
     console.log('conected') 
     app.listen(3000)
