@@ -9,9 +9,10 @@ const {userRegister, login} = require('./Controller/postController')
 const session = require('express-session')
 const store = session.MemoryStore();
 const Mongostore = require("connect-mongo")
+const axios = require('axios');
 try {
     //connecting to Database 
- const DBURL =  "mongodb+srv://username:password@cluster0.zxje8qe.mongodb.net/nodejs?retryWrites=true&w=majority";
+ const DBURL =  "mongodb+srv://stephendaro:jason007@cluster0.zxje8qe.mongodb.net/nodejs?retryWrites=true&w=majority";
  mongoose.connect(DBURL,{ useNewUrlParser: true, useUnifiedTopology:true  })
     console.log('conected') 
     app.listen(3000)
@@ -46,9 +47,27 @@ app.get('/register', (request, response)=>{
 response.render('register', {title:'register'})
 })
 
+
+
 app.get('/login', (request, response)=>{
-  
-    response.render('login', {title:'login'})
+
+    // axios.get('https://jsonplaceholder.typicode.com/posts')
+    // .then(result=>console.log(result.data))
+    // .catch(err=>console.log(err))
+
+    // axios.post('https://jsonplaceholder.typicode.com/posts', {
+    //     headers: {
+    //         'Content-type': 'application/json; charset=UTF-8',
+    //       },
+    //     body:{
+    //         title: 'stephen o',
+    //         body: 'testing testing',
+    //         userId: 70,  
+    //     }
+    // }).then(result=>console.log(result.data))
+    // .catch(err=>console.log(err))
+
+
 })
 
 
@@ -74,7 +93,7 @@ app.get('/logout', (request, response)=>{
 app.get('/update', (request, response)=>{
 //update session
     request.session.reload((err)=>{
-        response.render('/test', {'name':'stephen'});
+        response.render('/login', {title:'login'});
     })
 })
 
